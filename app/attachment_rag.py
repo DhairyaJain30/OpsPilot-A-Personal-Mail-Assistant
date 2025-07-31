@@ -30,8 +30,8 @@ def ingest_files_to_vector_db(folder_path: str) ->dict:
     """
     
     # --- Pinecone Setup --- #
-    pc = Pinecone(api_key="pcsk_57AL2C_7hXUSPp2nUeWKqGFuEZRdE5RrSjbcirQNrXUQ4h3CGo55ZVq5KM5BXpTc6PSpsk")
-    index_name = "hybrid-search-demo"
+    pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
+    index_name = "rag-search"
     namespace = "document-chunks"
     # --- Create index if needed --- #
     if not pc.has_index(index_name):
@@ -130,8 +130,8 @@ def query_vector_db(query: str, top_k: int = 5) -> dict:
     model = genai.GenerativeModel("gemini-2.0-flash")
     # --- Pinecone Setup --- #
     
-    pc = Pinecone(api_key="pcsk_57AL2C_7hXUSPp2nUeWKqGFuEZRdE5RrSjbcirQNrXUQ4h3CGo55ZVq5KM5BXpTc6PSpsk") 
-    index_name = "hybrid-search-demo"
+    pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY")) 
+    index_name = "rag-search"
     namespace = "document-chunks"
     index = pc.Index(index_name)
     
